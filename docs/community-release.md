@@ -40,7 +40,7 @@ GitHub 仓库已公开，并已设置 `dsh-plugin` topic（2026-10-26 核对）�
 
 npm 分发与社区收录可分别进行。项目已配置包名 `dsh-appearance-master`、`publishConfig.access: public`、文件白名单和发布前检查。这些配置用于准备发布；只有 `npm publish` 成功后，registry 才提供可安装的包版本。
 
-2026-10-26 已完成 `dsh-appearance-master@0.9.1` 的首次公开发布，并核验官方 registry 的 `latest` 指向 `0.9.1`，包摘要与本地上传文件一致。包页面：[dsh-appearance-master](https://www.npmjs.com/package/dsh-appearance-master)。
+2026-10-26 已公开发布 `dsh-appearance-master@0.9.2`，并核验官方 registry 的 `latest` 指向 `0.9.2`，包摘要与本地上传文件一致。包页面：[dsh-appearance-master](https://www.npmjs.com/package/dsh-appearance-master)。
 
 可通过 `dsh plugin --profile desktop add dsh-appearance-master` 安装，或通过 `npm view dsh-appearance-master version` 查询当前版本。市场收录仍需单独提交 PR。
 
