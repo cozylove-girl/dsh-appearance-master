@@ -1,0 +1,26 @@
+name: publish
+
+# 打一个 v 开头的 tag 就发布到 npm（例如：git tag v0.9.1 && git push --tags）
+# 需要先在仓库 Settings → Secrets and variables → Actions 里加一个 NPM_TOKEN
+# （npmjs.com → Access Tokens → Granular Access Token，权限：Read and write，仅限这个包）。
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      id-token: write # 让 npm 生成 provenance（可选但推荐）
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          registry-url: https://registry.npmjs.org
+      - run: npm test
+      - run: npm publish --access public --provenance
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

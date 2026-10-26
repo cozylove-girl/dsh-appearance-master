@@ -1,0 +1,61 @@
+{
+  "name": "dsh-appearance-master",
+  "version": "0.9.1",
+  "description": "DSH 外观总控：皮肤 / 主题 / 背景动画 / 装饰件分层管理，一层一个开关，写回 profile 的 cordis.patch.yml；支持整套方案保存与一键切回。",
+  "type": "module",
+  "main": "lib/index.js",
+  "exports": {
+    ".": "./lib/index.js",
+    "./client": "./lib/client.js",
+    "./package.json": "./package.json"
+  },
+  "dsh": {
+    "manifestVersion": 1,
+    "bundle": {
+      "patch": "./cordis.patch.yml"
+    },
+    "client": {
+      "inject": [
+        "@deepseek-ai/dsh-client-ui-settings"
+      ],
+      "platform": "web"
+    }
+  },
+  "engines": {
+    "dsh": ">=0.2.0-rc.2 <0.3.0-0"
+  },
+  "files": [
+    "lib",
+    "cordis.patch.yml",
+    "README.md",
+    "CHANGELOG.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "test": "node test/regressions.mjs && node test/smoke-host.mjs && node test/smoke-client.mjs && node test/write-safety.mjs && node test/two-layers.mjs && node test/nudge.mjs && node test/tuning-protocol.mjs && node test/check-manifest.mjs",
+    "preview": "node scripts/preview.mjs",
+    "verify": "node scripts/verify-runtime.mjs",
+    "prepublishOnly": "node scripts/pre-publish.mjs"
+  },
+  "keywords": [
+    "dsh",
+    "dsh-plugin",
+    "deepseek-harness",
+    "appearance",
+    "skin",
+    "theme",
+    "background",
+    "widget",
+    "cordis"
+  ],
+  "license": "MIT",
+  "author": "cozylove-girl",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cozylove-girl/dsh-appearance-master.git"
+  },
+  "homepage": "https://github.com/cozylove-girl/dsh-appearance-master#readme",
+  "bugs": {
+    "url": "https://github.com/cozylove-girl/dsh-appearance-master/issues"
+  }
+}

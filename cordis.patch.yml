@@ -1,0 +1,4 @@
+# dsh-appearance-master bundle patch layer — 把本包插入 profile 的插件树。
+- insert:
+    - id: ui-appearance-master
+      name: dsh-appearance-master

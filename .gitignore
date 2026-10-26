@@ -1,0 +1,27 @@
+# 依赖与构建产物
+node_modules/
+.pnpm-store/
+dist/
+.cache/
+*.tgz
+
+# 测试临时目录（每个测试自己建、跑完就删；中途失败会留下）
+test/.tmp-*/
+test/.tmp-*.json
+
+# 本机 / 编辑器 / 系统
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 本地环境与凭据（不要提交）
+.env
+.env.*
+*.local
+
+# 写入备份：本机点「应用」时和 cordis.patch.yml 一起生成
+*.master-bak
+*.master-bak-before-rollback
