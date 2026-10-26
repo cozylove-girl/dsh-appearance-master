@@ -6,14 +6,12 @@
 
 ---
 
-## 未发布
+## 0.9.1：开源发布与社区分发配置
 
 - 整理公开文档，保留项目初衷，明确安装方式、配置文件访问范围和兼容性。
 - 按社区当前规则说明 npm 发布为可选项，新增社区收录指南、目录 YAML 和 PR 文案。
 - 显式配置 npm 公开发布与官方 registry。
 - 区分声明的兼容范围与实机验证、发布配置与 npm 实际发布，以及市场收录后的安装方式。
-
-## 0.9.1：开源发布的脚手架
 
 - **仓库与清单**：`repository` / `homepage` / `bugs` 指向
   `github.com/cozylove-girl/dsh-appearance-master`；补 `author`、`LICENSE`（MIT）、README 顶部 CI 徽章。

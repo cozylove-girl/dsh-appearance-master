@@ -1,7 +1,7 @@
 {
   "name": "dsh-appearance-master",
   "version": "0.9.1",
-  "description": "DSH 外观总控：皮肤 / 主题 / 背景动画 / 装饰件分层管理，一层一个开关，写回 profile 的 cordis.patch.yml；支持整套方案保存与一键切回。",
+  "description": "DSH 外观总控：分层管理皮肤、主题、背景动画与装饰件，支持外观方案保存与切换。",
   "type": "module",
   "main": "lib/index.js",
   "exports": {
