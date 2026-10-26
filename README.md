@@ -29,7 +29,7 @@
 
 ## 安装
 
-支持 DSH 0.2 系列，兼容范围为 `>=0.2.0-rc.2 <0.3.0-0`。插件包含宿主端与 Web 客户端，通过 `dsh.bundle` 加载，无需额外构建。
+面向 DSH 0.2 系列，`package.json` 声明的兼容范围为 `>=0.2.0-rc.2 <0.3.0-0`。插件包含宿主端与 Web 客户端，通过 `dsh.bundle` 加载，无需额外构建。声明范围不代表逐个版本均经过实机验证。
 
 以下命令使用 `desktop` profile；使用其他 profile 时，请替换对应名称。
 
@@ -53,7 +53,7 @@ dsh plugin --profile desktop add /绝对路径/dsh-appearance-master
 
 ### 从插件市场安装
 
-使用包含社区目录的插件市场时，可搜索 `dsh-appearance-master` 安装。搜索结果取决于市场使用的索引及其更新时间；未搜索到时可使用上面的 GitHub 安装命令。
+项目经社区目录收录、且插件市场更新对应索引后，可搜索 `dsh-appearance-master` 安装。直接安装可使用上面的 GitHub 命令。
 
 社区目录收录与 npm 发布是独立流程，GitHub 源码安装不要求发布 npm 包。
 
@@ -123,7 +123,7 @@ DSH home 由 `DSH_HOME` 指定，默认使用 `~/.dsh`。启停操作优先使�
 
 ## 开发与验证
 
-项目没有第三方 npm 依赖，无需安装依赖或执行构建。修改 `lib/` 后重启 DSH 验证运行效果。
+项目未声明需要单独安装的 npm 依赖，React 与 DSH 客户端服务由宿主提供。开发检查无需安装依赖或执行构建。修改 `lib/` 后重启 DSH 验证运行效果。
 
 ```bash
 npm test                        # 运行全部八项离线检查

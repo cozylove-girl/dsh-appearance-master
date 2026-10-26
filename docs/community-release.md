@@ -38,8 +38,9 @@ GitHub 仓库已公开，并已设置 `dsh-plugin` topic（2026-10-26 核对）�
 
 ## npm 分发（可选）
 
-npm 分发与社区收录可分别进行。项目已配置包名 `dsh-appearance-master`、公开发布、文件白名单和发布前检查。
-实际可用的版本以 npm registry 为准，本指南不声明该包已发布。
+npm 分发与社区收录可分别进行。项目已配置包名 `dsh-appearance-master`、`publishConfig.access: public`、文件白名单和发布前检查。这些配置用于准备发布；只有 `npm publish` 成功后，registry 才提供可安装的包版本。
+
+2026-10-26 查询官方 registry 时，该包名返回 E404，未发现可公开获取的同名包。发布后可通过 `npm view dsh-appearance-master version` 核对实际版本。
 
 首次发布可在本机完成：
 

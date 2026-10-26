@@ -2,7 +2,7 @@
 
 这里保留每个版本「为什么这么改」的来龙去脉。日常使用只需看 [README](README.md)。
 
-> 0.9.0 起 README 精简为项目介绍与安装说明，下面的历史原样搬过来。
+> 下方各版本记录描述当时的实现与设计，后续版本可能调整这些行为。当前安装、兼容性和分发流程以 README 与社区发布指南为准；版本记录不代表对应版本已在 npm 发布。
 
 ---
 
@@ -11,6 +11,7 @@
 - 整理公开文档，保留项目初衷，明确安装方式、配置文件访问范围和兼容性。
 - 按社区当前规则说明 npm 发布为可选项，新增社区收录指南、目录 YAML 和 PR 文案。
 - 显式配置 npm 公开发布与官方 registry。
+- 区分声明的兼容范围与实机验证、发布配置与 npm 实际发布，以及市场收录后的安装方式。
 
 ## 0.9.1：开源发布的脚手架
 
@@ -20,8 +21,8 @@
   `repository` 是否回指本仓库、CHANGELOG 里有没有当前版本，并跑完八个离线测试；
   任何一项不过就中止 `npm publish`。
 - **CI**：`.github/workflows/ci.yml`，push / PR 自动跑 `npm test`（没有依赖，不需要 install）。
-- **发布流水线**：`.github/workflows/publish.yml`，推 `v*` tag 时以 `--provenance` 发布到 npm
-  （需要仓库 secret `NPM_TOKEN`）。
+- **发布流水线配置**：`.github/workflows/publish.yml`，推 `v*` tag 时触发带 `--provenance` 的 npm 发布任务
+  （需要仓库 secret `NPM_TOKEN`）；配置工作流本身不代表已成功发布。
 
 ## 0.9.0：把项目整理成「别人能直接装」的样子
 
