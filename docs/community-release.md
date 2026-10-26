@@ -40,9 +40,11 @@ GitHub 仓库已公开，并已设置 `dsh-plugin` topic（2026-10-26 核对）�
 
 npm 分发与社区收录可分别进行。项目已配置包名 `dsh-appearance-master`、`publishConfig.access: public`、文件白名单和发布前检查。这些配置用于准备发布；只有 `npm publish` 成功后，registry 才提供可安装的包版本。
 
-2026-10-26 查询官方 registry 时，该包名返回 E404，未发现可公开获取的同名包。发布后可通过 `npm view dsh-appearance-master version` 核对实际版本。
+2026-10-26 已完成 `dsh-appearance-master@0.9.1` 的首次公开发布，并核验官方 registry 的 `latest` 指向 `0.9.1`，包摘要与本地上传文件一致。包页面：[dsh-appearance-master](https://www.npmjs.com/package/dsh-appearance-master)。
 
-首次发布可在本机完成：
+可通过 `dsh plugin --profile desktop add dsh-appearance-master` 安装，或通过 `npm view dsh-appearance-master version` 查询当前版本。市场收录仍需单独提交 PR。
+
+后续版本发布前需更新 `package.json` 版本号和 CHANGELOG。可在本机执行：
 
 发布账户需要启用双重验证（2FA），或使用具备发布权限且允许 bypass 2FA 的 granular access token；仅 `npm whoami` 成功不代表拥有发布授权。可在 npm 网站的头像菜单 → Account → Two-Factor Authentication 中启用，具体见 [npm 官方说明](https://docs.npmjs.com/configuring-two-factor-authentication/)。
 

@@ -33,6 +33,14 @@
 
 以下命令使用 `desktop` profile；使用其他 profile 时，请替换对应名称。
 
+### 从 npm 安装
+
+```bash
+dsh plugin --profile desktop add dsh-appearance-master
+```
+
+发布版本见 [npm 包页面](https://www.npmjs.com/package/dsh-appearance-master)。
+
 ### 从 GitHub 安装
 
 ```bash
