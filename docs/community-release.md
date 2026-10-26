@@ -44,6 +44,8 @@ npm 分发与社区收录可分别进行。项目已配置包名 `dsh-appearance
 
 首次发布可在本机完成：
 
+发布账户需要启用双重验证（2FA），或使用具备发布权限且允许 bypass 2FA 的 granular access token；仅 `npm whoami` 成功不代表拥有发布授权。可在 npm 网站的头像菜单 → Account → Two-Factor Authentication 中启用，具体见 [npm 官方说明](https://docs.npmjs.com/configuring-two-factor-authentication/)。
+
 ```bash
 node scripts/pre-publish.mjs
 npm pack --dry-run
@@ -55,7 +57,7 @@ npm publish --access public
 `npm login` 需要包维护者完成浏览器登录或验证。`npm view` 用于检查包名和已有版本：如果返回 E404，表示该 registry 中没有可见的同名包；如果包已存在，应先核对维护权限和版本号。同一版本不能重复发布。
 
 项目还提供 `.github/workflows/publish.yml`，推送 `v*` tag 会尝试发布 npm 包。
-启用这条路径前，在[仓库 Actions Secrets](https://github.com/cozylove-girl/dsh-appearance-master/settings/secrets/actions) 配置具有对应包发布权限的 `NPM_TOKEN`，并确认 npm 账户及令牌的验证策略允许自动发布。
+启用这条路径前，在[仓库 Actions Secrets](https://github.com/cozylove-girl/dsh-appearance-master/settings/secrets/actions) 配置具有对应包发布权限、允许 bypass 2FA 的 granular access token，secret 名为 `NPM_TOKEN`。也可另行配置 npm Trusted Publisher 并调整工作流，使用 OIDC 发布。
 本机首次发布与自动发布选择一种执行，同一个版本不要重复发布。社区收录无需配置该 secret，也无需推送 tag。
 
 发布包的 `repository` 已指向本仓库，社区目录会自动尝试建立 npm 关联，无需在收录 YAML 中额外填写包名。

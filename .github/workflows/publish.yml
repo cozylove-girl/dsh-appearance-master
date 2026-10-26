@@ -2,7 +2,7 @@ name: publish
 
 # 推送 v 开头的 tag 会触发 npm 发布任务；发布成功还需有效的账户授权与可用版本号。
 # 需要先在仓库 Settings → Secrets and variables → Actions 里加一个 NPM_TOKEN
-# （npmjs.com → Access Tokens → Granular Access Token，权限：Read and write，仅限这个包）。
+# （npmjs.com → Access Tokens → Granular Access Token，需包发布权限与 bypass 2FA）。
 on:
   push:
     tags:
