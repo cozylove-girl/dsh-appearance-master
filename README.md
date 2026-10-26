@@ -2,75 +2,65 @@
 
 [![ci](https://github.com/cozylove-girl/dsh-appearance-master/actions/workflows/ci.yml/badge.svg)](https://github.com/cozylove-girl/dsh-appearance-master/actions/workflows/ci.yml)
 
-给 **DeepSeek Harness**（DSH）用的外观总控面板：皮肤、主题、背景动画、装饰件分层管理，
-一层一个开关，写回 profile 的 `cordis.patch.yml`，应用后刷新一次页面生效。
+**DeepSeek Harness（DSH）的外观管理面板**，集中切换皮肤、主题、背景动画和装饰件，支持保存与应用整套外观方案。
 
-设置 → **外观总控**（排在皮肤管理之后）。
+入口：**设置 → 外观总控**。
 
----
+## 项目初衷
 
-## 为什么会有这个东西
+同时使用多套皮肤、主题、视频背景和挂件时，外观设置分散在不同插件中。切换一套搭配需要反复打开多个面板；多个插件修改相同配置时，也容易出现覆盖与冲突。
 
-我一口气装了两套皮肤、一个主题、一段视频背景，还有那只余额小鲸鱼。它们单独看都很好，
-凑在一起就开始打架：
+我希望有一个统一入口，能够快速选择当前使用的外观、关闭某一层效果，并把常用搭配保存下来。因此做了外观总控，将皮肤、主题、背景和装饰件分层管理，让整套外观的切换更直接。
 
-- 谁生效，取决于哪一行 patch **最后**被写进 `cordis.patch.yml` —— 而它们各写各的；
-- 皮肤管理器只认包里的 `skin.json`，管不到改 CSS 变量的主题插件，也管不到铺视频的；
-- 想「把皮肤全关掉、只留主题」，翻遍设置也没找到那个开关；
-- 换身打扮要改好几个文件，第二天想换回去，已经想不起早上是什么样了。
+皮肤的具体样式仍可在皮肤管理器中调整，外观总控负责快捷切换和方案管理。
 
-所以我写了这个面板：把四类东西摆进同一张表，用同一套机制开关，顺手能把「现在这身」存成方案。
-它不替别的插件做主，只做那个**总开关**和**备忘录**——皮肤管理器管得到的地方，它照样放行。
+## 功能
 
-## 它做什么
-
-| 层 | 管什么 | 怎么选 |
+| 层 | 管理内容 | 选择方式 |
 |---|---|---|
-| 皮肤 | 整页布局 | 单选，含「关闭所有皮肤」 |
+| 皮肤 | 页面布局 | 单选，支持关闭所有皮肤 |
 | 主题 | 配色与质感 | 单选 |
 | 背景 / 动画 | 视频、壁纸、开机动画 | 单选 |
 | 装饰件 | 挂件、桌宠、状态条 | 多选 |
 
-- **一键切回**：把当前四层的选择存成「整套方案」，之后一点换回；
-- **只动自己那一段**：区块之外、以及区块里别人的行，一律保留；
-- 每次写入前自动备份成 `cordis.patch.yml.master-bak`。
+- 将当前选择保存为整套方案，随时重新应用。
+- 通过配置受管区块管理启停状态，保留其他插件的配置内容。
+- 直接修改补丁文件前自动生成 `cordis.patch.yml.master-bak` 备份。
 
 ## 安装
 
-需要 DSH 0.2 系列（支持 `dsh.client` 插件与 loader patch）。
+支持 DSH 0.2 系列，兼容范围为 `>=0.2.0-rc.2 <0.3.0-0`。插件包含宿主端与 Web 客户端，通过 `dsh.bundle` 加载，无需额外构建。
 
-### 方式一：插件市场里点一下（最省事）
+以下命令使用 `desktop` profile；使用其他 profile 时，请替换对应名称。
 
-先装插件市场（如果还没有）：
-
-```bash
-dsh plugin --profile desktop add dshmarket
-```
-
-打开 **插件 → 发现**，搜 `dsh-appearance-master`，点**安装**。装好刷新页面；没出现就重启一次 DSH。
-
-> 这条路依赖包已经发布到 npm、并被目录收录；还没上架时用下面两种。
-
-### 方式二：一条命令（本地目录 / git 都行）
+### 从 GitHub 安装
 
 ```bash
-# 已经 clone 或解压到本机
-dsh plugin --profile desktop add /绝对路径/dsh-appearance-master
-
-# 或者直接从仓库
 dsh plugin --profile desktop add git+https://github.com/cozylove-girl/dsh-appearance-master.git
 ```
 
-### 方式三：图形界面
+### 从本地目录安装
 
-**设置 → 插件** → 安装时填上面那个本地目录路径，效果和命令行一样。
+克隆或解压仓库后，将命令中的路径替换为实际绝对路径：
 
-装好后**重启 DSH、刷新页面**。没有 `dsh` 命令也不影响方式一和方式三。
+```bash
+dsh plugin --profile desktop add /绝对路径/dsh-appearance-master
+```
+
+也可以在 **设置 → 插件** 的安装入口填写本地目录路径。
+
+安装完成后，重启 DSH 并刷新页面。
+
+### 从插件市场安装
+
+使用包含社区目录的插件市场时，可搜索 `dsh-appearance-master` 安装。搜索结果取决于市场使用的索引及其更新时间；未搜索到时可使用上面的 GitHub 安装命令。
+
+社区目录收录与 npm 发布是独立流程，GitHub 源码安装不要求发布 npm 包。
 
 <details>
-<summary>手动接进 profile（不想用 CLI 的话）</summary>
+<summary>手动配置 profile</summary>
 
-在 profile 的 `package.json` 里加两条，再 `pnpm install`：
+将以下字段合并到 profile 的 `package.json`，保留已有依赖和 bundles，再运行 `pnpm install`：
 
 ```json
 {
@@ -87,102 +77,74 @@ dsh plugin --profile desktop add git+https://github.com/cozylove-girl/dsh-appear
 dsh plugin --profile desktop remove dsh-appearance-master
 ```
 
-之后可选：把 `cordis.patch.yml` 里 `# --- appearance-master managed ---` 那段删掉，
-或者用旁边的 `.master-bak` 覆盖回去。
+如需清理保留的启停配置，可在 profile 和 DSH home 的 `cordis.patch.yml` 中移除
+`# --- appearance-master managed` 至 `# --- end appearance-master managed ---` 的完整受管区块。
+如需使用 `.master-bak` 恢复，请先确认备份内容，避免覆盖备份生成后所做的其他配置修改。
 
-## 推荐搭配
+## 使用
 
-这三个是一套，配合起来才顺手 —— 它们写的是同一批 `ui-skin-*` 行，所以天生同步：
+1. 为皮肤、主题、背景各选择一项，按需勾选装饰件。选择“关闭所有皮肤”可停用皮肤层。
+2. 点击 **应用并刷新**，写入配置并重新加载页面。
+3. 为常用组合命名并保存，之后可从方案列表重新应用。
 
-| 插件 | 干什么 | 为什么配它 |
-|---|---|---|
-| **外观总控**（本项目） | 四层总开关、整套方案 | 决定「这一刻加载哪些外观」 |
-| **皮肤管理器**<br>`@smalltailqwq/dsh-client-ui-skin-deep-whale-manager` | 换皮肤、桌面图标跟随、每套皮肤的细调 | 本面板只管快捷切换与全关，**细调在它那里**；两边选中的永远是同一套 |
-| **皮肤市场**<br>`dsh-skin-market` | 带界面的皮肤商店，逛、装、卸载皮肤 | 新皮肤装好后，会自动出现在上面两边的列表里 |
+“已加载 / 已停用”反映读取到的启停配置；尚未应用的选择显示为“待应用”。
 
-```bash
-dsh plugin --profile desktop add dsh-skin-market
-dsh plugin --profile desktop add @smalltailqwq/dsh-client-ui-skin-deep-whale-manager
-```
+## 配合其他外观插件使用
 
-配合起来的样子：
-
-- 想**快速换一套**、或者**一个皮肤都不开** → 用本面板，点完刷新就是；
-- 想调这套皮肤的**颜色、字号、显隐时段** → 去「设置 → 皮肤管理」；
-- 想**找新皮肤** → 逛皮肤市场，装完回来刷新一下；
-- 不管在哪边切换，另一边刷新后都是同一套——因为它们读的是同一份配置。
-
-## 用起来
-
-1. 每层选一个；皮肤那层点「关闭所有皮肤」＝ 一个都不加载。
-2. 点 **应用并刷新**。写完配置会刷新一次页面——外观插件是页面启动时装进去的，只有重新加载才算数。
-3. 常用组合起个名字存成方案，以后一键切回。
-
-「已加载 / 已停用」是配置里的真实状态；你自己点了还没应用的，会标成「待应用」。
-
-## 它会改哪些文件
-
-| 文件 | 改什么 |
+| 插件 | 用途 |
 |---|---|
-| `<profile>/cordis.patch.yml` | 自己那一段受管区块（`- id` + `disabled`） |
-| `<home>/cordis.patch.yml` | 同上（home 层优先级更高，两边都写才压得住） |
-| `$DSH_HOME/appearance-presets.json` | 整套方案 |
-| `$DSH_HOME/appearance-master.heartbeat.json` | 启动心跳，只用于诊断 |
+| 外观总控（本项目） | 分层切换、关闭皮肤、管理整套方案 |
+| 皮肤管理器 `@smalltailqwq/dsh-client-ui-skin-deep-whale-manager` | 皮肤切换、桌面图标跟随及皮肤细调 |
+| 皮肤市场 `dsh-skin-market` | 浏览、安装与卸载皮肤 |
 
-不联网、不读会话、不碰 `node_modules`、不碰别人的配置。
+这些插件可按需搭配使用。外观总控与皮肤管理器读取相同的皮肤启停配置，在一处切换后，可刷新另一处查看状态。
+安装新的外观插件后，刷新外观总控即可重新扫描。
 
-## 已知边界
+## 数据与文件访问
 
-- **应用后要刷新一次页面**：这是外观插件的加载方式决定的，不是偷懒。
-- 有些插件自己还有一层开关（视频背景、主题素材、挂件角色），那一层不在本面板里。
-- 和「官方插件管理器 / 皮肤管理器」同时写同一行时，后写者生效——本面板的写总排在最后一段。
+插件扫描本地已安装的外观插件及其配置，浏览器通过同源接口与 DSH 宿主通信。外观管理功能不调用外部网络服务，也不读取会话内容。
 
-## 发布到社区（维护者）
+| 文件 | 用途 |
+|---|---|
+| `<profile>/cordis.patch.yml` | profile 层的外观启停配置 |
+| `<DSH home>/cordis.patch.yml` | home 层的外观启停配置；该层优先级更高 |
+| `<DSH home>/appearance-presets.json` | 保存的外观方案 |
+| `<DSH home>/appearance-master.heartbeat.json` | 启动诊断信息 |
+| `cordis.patch.yml.master-bak` | 补丁修改前的备份，位于相应补丁文件旁 |
 
-想把「一键安装」真正打开，需要三件事，缺一件就只剩路径安装：
+DSH home 由 `DSH_HOME` 指定，默认使用 `~/.dsh`。启停操作优先使用宿主插件管理接口；需要直接修改补丁时，写入本插件的受管区块并保留其他配置。
 
-1. **发布到 npm**：`npm publish --access public`。目录装的正是 `name@version`。
-2. **`repository` 指回 GitHub**：目录会校验「npm 包名回指同一个仓库」。仓库里已经写好了
-   `git+https://github.com/cozylove-girl/dsh-appearance-master.git`，改仓库就同步改它。
-3. **被目录收录**：插件市场的目录来自
-   [`awesome-dsh-plugin/awesome-dsh-plugin`](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin)
-   （CI 每日刷新，data 与 `scripts/build-site.mjs` 在那边），按其 `contributing.md` 提交收录。
-   dsh 0.2.1+ 的「插件 → 发现 → 索引源」也能直接加任何 format 1 索引。
+## 兼容性说明
 
-`engines.dsh` 已写在 `package.json` 里（`>=0.2.0-rc.2 <0.3.0-0`），市场会据此标兼容性。
+- 应用外观选择后会刷新页面，以重新加载客户端外观插件。宿主提示需要重启时，请重启 DSH。
+- 视频素材、主题细节、挂件角色等插件内部选项，仍在对应插件的设置中调整。
+- 多个管理器修改相同启停项时，最终状态受配置层级与写入顺序影响。建议完成一次切换后刷新其他管理面板。
+- 自动备份用于恢复最近一次补丁修改，连续应用会更新备份。
 
-发布守门：`npm publish` 前会自动跑 `scripts/pre-publish.mjs` —— 检查清单字段、
-`repository` 回指、CHANGELOG 有没有当前版本、八个离线测试是否全绿，任何一项不过就中止发布。
-也可以手动跑：
+## 开发与验证
 
-```bash
-node scripts/pre-publish.mjs
-```
-
-## 开发
-
-没有构建步骤，改完 `lib/` 重启 DSH 即可。自检全部离线、自带临时 profile，不碰你真机：
+项目没有第三方 npm 依赖，无需安装依赖或执行构建。修改 `lib/` 后重启 DSH 验证运行效果。
 
 ```bash
-npm test                       # 下面这些一次跑完
-node test/regressions.mjs      # 外观归属 / 冲突 / 刷新 / 皮肤同步 的回归
-node test/smoke-host.mjs       # 路由、确认门控、方案增删、心跳
-node test/smoke-client.mjs     # 前端模块形状与选择语义
-node test/write-safety.mjs     # CRLF、noop、状态保留、拒绝非 profile、回滚
-node test/two-layers.mjs       # 两层补丁的优先级
-node test/nudge.mjs            # 交给官方插件管理器的那条通道
-node test/tuning-protocol.mjs  # 皮肤细调协议（与皮肤管理器共用）
-node test/check-manifest.mjs   # package.json 字段
+npm test                        # 运行全部八项离线检查
+node scripts/pre-publish.mjs     # 校验发布元数据并运行测试
+node scripts/preview.mjs         # 只读预览本机配置及待写入内容
 ```
 
-只读诊断（不动任何文件）：
+测试使用临时 profile；清单检查在本机存在已链接插件时还会只读比较版本。
+离线测试覆盖配置写入、两层优先级、宿主接口、客户端选择语义和皮肤细调协议；实际界面效果需在 DSH 中验证。
 
-```bash
-node scripts/preview.mjs       # 现在的状态 + 下一次应用会写哪几行
-```
+版本记录见 [CHANGELOG.md](CHANGELOG.md)。
 
-历史与每一版的来龙去脉在 [CHANGELOG.md](CHANGELOG.md)。
+## 社区收录与发布
+
+收录流程与可直接使用的投稿材料见 [社区发布指南](https://github.com/cozylove-girl/dsh-appearance-master/blob/main/docs/community-release.md)。
+
+社区收录要求仓库提供可安装的 `dsh.bundle`、真实可用的代码、`dsh-plugin` topic，并满足仓库创建时间要求。
+提交内容为社区目录中的一个 YAML 文件，具体以[社区贡献指南](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/contributing.md)为准。
+
+npm 发布为可选分发方式，用于按包名安装与展示下载量。发布包的 `repository` 必须回指本仓库；本项目已配置包信息、MIT 许可和发布前校验。
 
 ## 许可
 
-MIT
+[MIT](LICENSE) · Copyright (c) 2026 cozylove-girl

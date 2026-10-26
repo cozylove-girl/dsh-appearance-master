@@ -49,6 +49,10 @@
     "cordis"
   ],
   "license": "MIT",
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
   "author": "cozylove-girl",
   "repository": {
     "type": "git",
