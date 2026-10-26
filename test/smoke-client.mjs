@@ -28,6 +28,7 @@ console.log('has factory:', typeof definition.factory === 'function')
 const FakeReact = {
   createElement: (type, props, ...children) => ({ type, props, children }),
   useState: (initial) => [initial, () => {}],
+  useRef: (initial) => ({ current: initial }),
   useEffect: () => {},
   useMemo: (factory) => factory(),
   useCallback: (fn) => fn,

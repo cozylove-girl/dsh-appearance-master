@@ -111,7 +111,7 @@ const broken = [
   '  config:',
   '    preference: dark',
 ].join('\n')
-const healed = stripManagedBlock(broken)
+const healed = stripManagedBlock(broken, { ownedRows: new Set(['ui-fake-theme']) })
 check('区块头与我们的行被摘掉', !healed.includes('appearance-master managed') && !healed.includes('ui-fake-theme'), healed)
 check('后面的用户配置完整保留', healed.includes('ui-theme') && healed.includes('preference: dark'), healed)
 
@@ -129,9 +129,10 @@ const foreignInBlock = [
   '    sodium: on',
   MARK_END,
 ].join('\n')
-const kept = foreignBlockRows(foreignInBlock.slice(MARK_START.length, foreignInBlock.length - MARK_END.length))
+const legacyOwnership = { ownedRows: new Set(['ui-skin-maid-atelier', 'ui-skin-claude-style']) }
+const kept = foreignBlockRows(foreignInBlock.slice(MARK_START.length, foreignInBlock.length - MARK_END.length), legacyOwnership)
 check('带额外键的外来行被识别为「别人的」', kept.length === 1 && kept[0].includes('sodium: on'), JSON.stringify(kept))
-const strippedForeign = stripManagedBlock(foreignInBlock)
+const strippedForeign = stripManagedBlock(foreignInBlock, legacyOwnership)
 check('重写区块时外来行被保留', strippedForeign.includes('sodium: on') && strippedForeign.includes('ui-skin-claude-style'), strippedForeign)
 check('我们自己的行仍然被摘掉', !strippedForeign.includes('ui-skin-maid-atelier'), strippedForeign)
 check('保留的外来行排在区块前面（我们的块仍是最后一段）', strippedForeign.trimEnd().endsWith('sodium: on'), strippedForeign)

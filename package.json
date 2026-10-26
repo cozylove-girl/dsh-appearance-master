@@ -1,6 +1,6 @@
 {
   "name": "dsh-appearance-master",
-  "version": "0.9.1",
+  "version": "0.9.2",
   "description": "DSH 外观总控：分层管理皮肤、主题、背景动画与装饰件，支持外观方案保存与切换。",
   "type": "module",
   "main": "lib/index.js",
@@ -32,7 +32,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "test": "node test/regressions.mjs && node test/smoke-host.mjs && node test/smoke-client.mjs && node test/write-safety.mjs && node test/two-layers.mjs && node test/nudge.mjs && node test/tuning-protocol.mjs && node test/check-manifest.mjs",
+    "test": "node test/regressions.mjs && node test/smoke-host.mjs && node test/smoke-client.mjs && node test/client-behavior.mjs && node test/write-safety.mjs && node test/two-layers.mjs && node test/nudge.mjs && node test/tuning-protocol.mjs && node test/stability.mjs && node test/check-manifest.mjs",
     "preview": "node scripts/preview.mjs",
     "verify": "node scripts/verify-runtime.mjs",
     "prepublishOnly": "node scripts/pre-publish.mjs"

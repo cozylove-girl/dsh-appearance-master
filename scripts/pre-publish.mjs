@@ -5,7 +5,7 @@
  *   1. 清单字段齐不齐（bundle patch / client / main / files / engines.dsh）；
  *   2. repository 是不是真的指回这个仓库（插件目录会校验 npm 包名回指仓库）；
  *   3. 版本号有没有在 CHANGELOG 里留一条；
- *   4. 八个离线测试全部通过。
+ *   4. 全部离线测试通过。
  *
  * 任何一项不过就非零退出，npm 会中止发布。
  */
@@ -55,10 +55,12 @@ if (problems.length === 0) {
     'test/regressions.mjs',
     'test/smoke-host.mjs',
     'test/smoke-client.mjs',
+    'test/client-behavior.mjs',
     'test/write-safety.mjs',
     'test/two-layers.mjs',
     'test/nudge.mjs',
     'test/tuning-protocol.mjs',
+    'test/stability.mjs',
     'test/check-manifest.mjs',
   ]
   for (const script of suite) {
