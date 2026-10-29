@@ -61,9 +61,11 @@ dsh plugin --profile desktop add /绝对路径/dsh-appearance-master
 
 ### 从插件市场安装
 
-项目经社区目录收录、且插件市场更新对应索引后，可搜索 `dsh-appearance-master` 安装。直接安装可使用上面的 GitHub 命令。
+本项目已收录至 [DSH 社区插件目录](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/blob/main/data/plugins/cozylove-girl__dsh-appearance-master.yml)（[收录 PR #10138](https://github.com/awesome-dsh-plugin/awesome-dsh-plugin/pull/10138)）。
 
-社区目录收录与 npm 发布是独立流程，GitHub 源码安装不要求发布 npm 包。
+在使用该社区目录的插件市场中，刷新或更新索引后，搜索 `dsh-appearance-master`，点击安装。安装完成后重启 DSH 并刷新页面。
+
+各市场的索引更新时间可能不同；如果暂时搜索不到，可先使用上面的 npm 或 GitHub 安装命令。
 
 <details>
 <summary>手动配置 profile</summary>
